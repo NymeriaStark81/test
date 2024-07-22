@@ -5,6 +5,7 @@ const cors = require('cors')
 const path = require('path')
 
 dotenv.config()
+/*
 if(process.env.NODE_ENV === 'local'){
     app.use(cors({
         origin: 'http://localhost:5173/',
@@ -15,7 +16,7 @@ if(process.env.NODE_ENV === 'local'){
         credentials: true
     }))
 }
-
+*/
 
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, "./frontend/dist")))
@@ -26,10 +27,12 @@ if(process.env.NODE_ENV === 'production') {
 
 const dbConnect = async() => {
     try {
-        if(process.env.NODE_ENV === 'local'){
+        if(process.env.NODE_ENV === 'production'){
+            /*
             await mongoose.connect(process.env.LOCAL_DB_URI)
             console.log('Database connecting ...')
         } else {
+            */
             await mongoose.connect(process.env.MONGODB_URI)
             console.log('Production database connecting ...')
         }
